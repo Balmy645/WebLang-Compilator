@@ -1,0 +1,44 @@
+inicio pagina
+
+titulo "Mi Página Ejemplo" estilo "color:blue; font-size:24px;"
+texto "Este es un texto de prueba dentro de la página."
+
+linea simple
+
+menu opciones
+
+seccion galeria
+    img1 img2 img3
+    domicilio: "Calle Falsa 123"
+    telefono: "555-1234"
+
+seccion informacion
+    foto1 foto2
+    descripcion: "Fotos de nuestros productos"
+
+crud inicio
+    bdd tiendaDB
+    tabla productos
+        campo id
+        campo nombre
+        campo precio
+        campo existencia
+    fintabla
+crud fin
+
+css inicio
+    body {
+        background: "lightgray";
+        margin: "10px";
+    }
+    h1 {
+        color: "darkred";
+        font-size: "30px";
+    }
+    nav {
+        background: "white";
+    }
+css fin
+
+fin pagina
+
