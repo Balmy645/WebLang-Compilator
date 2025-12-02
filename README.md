@@ -34,3 +34,28 @@ java -cp "lib/antlr-3.5.2-complete.jar;build" compiladorhtml.Main src/<your-file
 ```PowerShell
 java -cp "lib/antlr-3.5.2-complete.jar;build" compiladorhtml.MiniIDE
 ```
+
+# What can it do?
+
+
+| **Element / Rule**                         | **Description**                                          | **Sample**                              |
+| -------------------------------------------- | -------------------------------------------------------- | ----------------------------------------------- |
+| **Inicio de página**                         | Estructura obligatoria que envuelve todo.                | `inicio pagina`...`fin pagina`                  |
+| **Título** (`titulo`)                        | Inserta un `<h1>` con texto y estilo opcional.           | `titulo "Bienvenido" estilo "color:red;"`       |
+| **Texto** (`texto`)                          | Inserta un párrafo `<p>` con estilo opcional.            | `texto "Hola mundo" estilo "font-weight:bold;"` |
+| **Línea simple** (`linea simple`)            | Inserta `<hr/>`.                                         | `linea simple`                                  |
+| **Menú** (`menu opciones`)                   | Inserta un menú fijo `<nav><ul>…</ul></nav>`.            | `menu opciones`                                 |
+| **Sección** (`seccion`)                      | Crea `<section id="...">`.                               | `seccion galeria`                               |
+| **Lista de imágenes** (`imagenList`)         | Lista de IDENT consecutivos crea múltiples `<img>`.      | `img1 img2 img3`                                |
+| **Atributos dentro de sección** (`atributo`) | Agrega `<p><strong>clave:</strong> valor</p>`.           | `telefono: "12345"`                             |
+| **Bloque CRUD** (`crud inicio ... crud fin`) | Registra base, tabla y campos, genera JSON y tabla HTML. | Ver sección CRUD abajo.                         |
+| **Campo CRUD** (`campo`)                     | Se guarda en `crudFields`.                               | `campo nombre`                                  |
+| **Bloque CSS** (`css inicio ... css fin`)    | Genera código para `styles.css` y agrega `<link>`.       | Ver sección CSS abajo.                          |
+| **Regla CSS** (`regla`)                      | Una regla con selector y propiedades.                    | `body { margin: "10px"; }`                      |
+| **Propiedad CSS** (`propiedad`)              | Línea `prop: valor;` dentro del bloque.                  | `color: "blue";`                                |
+| **Strings** (`STRING`)                       | Cadena entre comillas.                                   | `"Hola"`                                        |
+| **Identificadores** (`IDENT`)                | Letras, números, guiones, puntos, guion bajo.            | `foto1`                                         |
+| **Comentarios** (`// ...`)                   | Comentarios de una línea.                                | `// esto es un comentario`                      |
+
+
+
