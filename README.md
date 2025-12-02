@@ -3,7 +3,7 @@ A repertory made to practice the creation of a WebLang compilator.
 
 # How to use
 
-Open a PS Console (No admin rights needed) in the root of the downloaded contents and type the following commands, depending on the current need.
+Before starting, make sure you have `Java` installed and added to your `classpath`. Open a PS Console (No admin rights needed) in the root of the downloaded contents and type the following commands, depending on the current need.
 
 ### To compilate a new grammatic
 
