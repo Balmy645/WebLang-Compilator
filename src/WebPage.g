@@ -24,6 +24,158 @@ import org.antlr.runtime.*;
     public String crudTable = "";
     public java.util.List<String> crudFields = new java.util.ArrayList<String>();
 
+// ==============================
+// GENERACIÓN SQL + PHP CRUD
+// ==============================
+
+private void generateSQLAndPHP() {
+    try {
+        // -------- SQL --------
+        java.io.FileWriter sql = new java.io.FileWriter("schema.sql");
+
+        sql.write("CREATE DATABASE IF NOT EXISTS " + crudDatabase + ";\n");
+        sql.write("USE " + crudDatabase + ";\n\n");
+
+        sql.write("CREATE TABLE " + crudTable + " (\n");
+        sql.write("  id SERIAL PRIMARY KEY,\n");
+
+        for (int i = 0; i < crudFields.size(); i++) {
+            sql.write("  " + crudFields.get(i) + " VARCHAR(255)");
+            if (i < crudFields.size() - 1) sql.write(",");
+            sql.write("\n");
+        }
+
+        sql.write(");\n");
+        sql.close();
+
+        // -------- PHP DB --------
+        java.io.FileWriter db = new java.io.FileWriter("db.php");
+        db.write("<?php\n");
+        db.write("$" + "host = \"localhost\";\n");
+        db.write("$" + "db   = \"" + crudDatabase + "\";\n");
+        db.write("$" + "user = \"root\";\n");
+        db.write("$" + "pass = \"\";\n");
+        db.write("$" + "pdo = new PDO(\"mysql:host="+"$"+"host;dbname="+"$"+"db\", "+"$"+"user, "+"$"+"pass);\n");
+        db.write("$" + "pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n");
+        db.write("?>\n");
+        db.close();
+
+        generateCreate();
+        generateRead();
+        generateUpdate();
+        generateDelete();
+
+    } catch (Exception e) {
+        System.err.println("Error generando CRUD PHP/SQL: " + e.getMessage());
+    }
+}
+//-----------------------------------
+//----------CREATE-------------------
+//---+-------------------------------
+
+private void generateCreate() throws Exception {
+    java.io.FileWriter fw = new java.io.FileWriter("create_" + crudTable + ".php");
+
+    fw.write("<?php\ninclude 'db.php';\n");
+
+    for (String f : crudFields) {
+        fw.write("$" + f + " = "+"$"+"_POST['" + f + "'];\n");
+    }
+
+    fw.write("\n"+"$"+"sql = \"INSERT INTO " + crudTable + " (");
+    fw.write(String.join(",", crudFields));
+    fw.write(") VALUES (");
+
+    for (int i = 0; i < crudFields.size(); i++) {
+        fw.write("?");
+        if (i < crudFields.size() - 1) fw.write(",");
+    }
+    fw.write(")\";\n");
+
+    fw.write("$"+"stmt = "+"$"+"pdo->prepare("+"$"+"sql);\n");
+    int idx = 1;
+    for (String f : crudFields) {
+        fw.write("$" + "stmt->bindValue(" + idx++ + ", $" + f + ");\n");
+
+    }
+
+    fw.write("$"+"stmt->execute();\n");
+    fw.write("echo \"Registro insertado\";\n");
+    fw.write("?>");
+    fw.close();
+}
+
+//------------------------------------
+//+-------------READ------------------
+//------------------------------------
+
+private void generateRead() throws Exception {
+    java.io.FileWriter fw = new java.io.FileWriter("read_" + crudTable + ".php");
+
+    fw.write("<?php\ninclude 'db.php';\n");
+    fw.write("$"+"stmt = "+"$"+"pdo->query(\"SELECT * FROM " + crudTable + "\");\n");
+    fw.write("while ("+"$"+"row = "+"$"+"stmt->fetch()) {\n");
+    fw.write("  print_r("+"$"+"row);\n");
+    fw.write("}\n?>");
+
+    fw.close();
+}
+
+//------------------------------------------
+//-----------UPDATE-------------------------
+//------------------------------------------
+
+private void generateUpdate() throws Exception {
+    java.io.FileWriter fw = new java.io.FileWriter("update_" + crudTable + ".php");
+
+    fw.write("<?php\ninclude 'db.php';\n");
+    fw.write("$"+"id = "+"$"+"_POST['id'];\n");
+
+    for (String f : crudFields) {
+        fw.write("$" + f + " = $" + "_POST['" + f + "'];\n");
+
+    }
+
+    fw.write("$"+"sql = \"UPDATE " + crudTable + " SET ");
+
+    for (int i = 0; i < crudFields.size(); i++) {
+        fw.write(crudFields.get(i) + "=?");
+        if (i < crudFields.size() - 1) fw.write(", ");
+    }
+
+    fw.write(" WHERE id=?\";\n");
+    fw.write("$"+"stmt = "+"$"+"pdo->prepare("+"$"+"sql);\n");
+
+    int idx = 1;
+    for (String f : crudFields) {
+        fw.write("$" + "stmt->bindValue(" + idx++ + ", $" + f + ");\n");
+
+    }
+
+    fw.write("$"+"stmt->bindValue(" + idx + ", "+"$"+"id);\n");
+    fw.write("$"+"stmt->execute();\n");
+    fw.write("echo \"Actualizado\";\n?>");
+
+    fw.close();
+}
+
+//-----------------------------------------------------------
+//---------------DELETE-------------------------------------
+//------------------------------------------------------------
+
+private void generateDelete() throws Exception {
+    java.io.FileWriter fw = new java.io.FileWriter("delete_" + crudTable + ".php");
+
+    fw.write("<?php\ninclude 'db.php';\n");
+    fw.write("$"+"id = "+"$"+"_GET['id'];\n");
+    fw.write("$"+"stmt = "+"$"+"pdo->prepare(\"DELETE FROM " + crudTable + " WHERE id=?\");\n");
+    fw.write("$"+"stmt->execute(["+"$"+"id]);\n");
+    fw.write("echo \"Eliminado\";\n?>");
+
+    fw.close();
+}
+
+
         public String getCrudJson() {
         StringBuilder sb = new StringBuilder();
         sb.append("{\n");
@@ -116,7 +268,12 @@ block
     | menu
     | seccion
     | texto
-    | crud_block
+    | crud_block {
+        //evita error de duplicidad del crud al generar
+        crudFields.clear();
+        //genera el sql y php de ese bloque
+        generateSQLAndPHP();
+    }
     | estilos
     ;
 

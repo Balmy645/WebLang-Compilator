@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS tiendaDB;
+USE tiendaDB;
+
+CREATE TABLE productos (
+  id SERIAL PRIMARY KEY,
+);

@@ -1,4 +1,4 @@
-// $ANTLR 3.5.2 src/WebPage.g 2025-12-01 09:48:45
+// $ANTLR 3.5.2 src/WebPage.g 2025-12-13 09:56:18
 
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -492,11 +492,11 @@ public class WebPageLexer extends Lexer {
 		try {
 			int _type = STRING;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/WebPage.g:298:5: ( '\"' (~ '\"' )* '\"' )
-			// src/WebPage.g:298:7: '\"' (~ '\"' )* '\"'
+			// src/WebPage.g:455:5: ( '\"' (~ '\"' )* '\"' )
+			// src/WebPage.g:455:7: '\"' (~ '\"' )* '\"'
 			{
 			match('\"'); 
-			// src/WebPage.g:298:11: (~ '\"' )*
+			// src/WebPage.g:455:11: (~ '\"' )*
 			loop1:
 			while (true) {
 				int alt1=2;
@@ -542,10 +542,10 @@ public class WebPageLexer extends Lexer {
 		try {
 			int _type = IDENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/WebPage.g:302:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' | '.' )+ )
-			// src/WebPage.g:302:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' | '.' )+
+			// src/WebPage.g:459:5: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' | '.' )+ )
+			// src/WebPage.g:459:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' | '.' )+
 			{
-			// src/WebPage.g:302:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' | '.' )+
+			// src/WebPage.g:459:7: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '-' | '.' )+
 			int cnt2=0;
 			loop2:
 			while (true) {
@@ -594,10 +594,10 @@ public class WebPageLexer extends Lexer {
 		try {
 			int _type = NL;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/WebPage.g:306:5: ( ( ( '\\r' )? '\\n' )+ )
-			// src/WebPage.g:306:7: ( ( '\\r' )? '\\n' )+
+			// src/WebPage.g:463:5: ( ( ( '\\r' )? '\\n' )+ )
+			// src/WebPage.g:463:7: ( ( '\\r' )? '\\n' )+
 			{
-			// src/WebPage.g:306:7: ( ( '\\r' )? '\\n' )+
+			// src/WebPage.g:463:7: ( ( '\\r' )? '\\n' )+
 			int cnt4=0;
 			loop4:
 			while (true) {
@@ -609,9 +609,9 @@ public class WebPageLexer extends Lexer {
 
 				switch (alt4) {
 				case 1 :
-					// src/WebPage.g:306:8: ( '\\r' )? '\\n'
+					// src/WebPage.g:463:8: ( '\\r' )? '\\n'
 					{
-					// src/WebPage.g:306:8: ( '\\r' )?
+					// src/WebPage.g:463:8: ( '\\r' )?
 					int alt3=2;
 					int LA3_0 = input.LA(1);
 					if ( (LA3_0=='\r') ) {
@@ -619,7 +619,7 @@ public class WebPageLexer extends Lexer {
 					}
 					switch (alt3) {
 						case 1 :
-							// src/WebPage.g:306:8: '\\r'
+							// src/WebPage.g:463:8: '\\r'
 							{
 							match('\r'); 
 							}
@@ -656,10 +656,10 @@ public class WebPageLexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/WebPage.g:310:5: ( ( ' ' | '\\t' )+ )
-			// src/WebPage.g:310:7: ( ' ' | '\\t' )+
+			// src/WebPage.g:467:5: ( ( ' ' | '\\t' )+ )
+			// src/WebPage.g:467:7: ( ' ' | '\\t' )+
 			{
-			// src/WebPage.g:310:7: ( ' ' | '\\t' )+
+			// src/WebPage.g:467:7: ( ' ' | '\\t' )+
 			int cnt5=0;
 			loop5:
 			while (true) {
@@ -709,12 +709,12 @@ public class WebPageLexer extends Lexer {
 		try {
 			int _type = SL_COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// src/WebPage.g:315:5: ( '//' (~ ( '\\n' | '\\r' ) )* )
-			// src/WebPage.g:315:7: '//' (~ ( '\\n' | '\\r' ) )*
+			// src/WebPage.g:472:5: ( '//' (~ ( '\\n' | '\\r' ) )* )
+			// src/WebPage.g:472:7: '//' (~ ( '\\n' | '\\r' ) )*
 			{
 			match("//"); 
 
-			// src/WebPage.g:315:12: (~ ( '\\n' | '\\r' ) )*
+			// src/WebPage.g:472:12: (~ ( '\\n' | '\\r' ) )*
 			loop6:
 			while (true) {
 				int alt6=2;

@@ -1,25 +1,24 @@
 inicio pagina
 
 titulo "Mi Página Ejemplo" estilo "color:blue; font-size:24px;"
-texto "Este es un texto de prueba dentro de la página."
+
+texto "Bienvenido a nuestra página generada con ANTLR" estilo "font-style:italic;"
 
 linea simple
 
 menu opciones
 
-seccion galeria
-    img1 img2 img3
+seccion galeria img1 img2 img3
     domicilio: "Calle Falsa 123"
     telefono: "555-1234"
 
-seccion informacion
-    foto1 foto2
+seccion informacion foto1 foto2
     descripcion: "Fotos de nuestros productos"
+    horario: "Lunes a Viernes 9:00 - 18:00"
 
 crud inicio
     bdd tiendaDB
     tabla productos
-        campo id
         campo nombre
         campo precio
         campo existencia
@@ -37,6 +36,10 @@ css inicio
     }
     nav {
         background: "white";
+    }
+    section {
+        border: "1px solid black";
+        padding: "10px";
     }
 css fin
 
